@@ -8,7 +8,7 @@ import coil.load
 import com.example.youtube_month6.databinding.ItemPlaylistsBinding
 import com.example.youtube_month6.model.Item
 
-class PlaylistAdapter() :
+class PlaylistAdapter(private val onClick: (Item) -> Unit) :
     RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
@@ -42,6 +42,10 @@ class PlaylistAdapter() :
             binding.image.load(item?.snippet?.thumbnails?.default?.url)
             binding.tvTitle.text = item?.snippet?.title
             binding.tvVideo.text = "${item?.contentDetails?.itemCount} video"
+
+            itemView.setOnClickListener {
+                onClick.invoke(item!!)
+            }
         }
     }
 }

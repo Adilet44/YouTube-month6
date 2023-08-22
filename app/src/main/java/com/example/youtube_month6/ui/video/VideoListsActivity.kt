@@ -1,17 +1,42 @@
 package com.example.youtube_month6.ui.video
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import com.example.youtube_month6.core.base.BaseActivity
-import com.example.youtube_month6.core.base.BaseViewModel
 import com.example.youtube_month6.databinding.ActivityVideoListBinding
+import com.example.youtube_month6.ui.video.adapter.VideoListAdapter
 
-class VideoListsActivity() : BaseActivity<ActivityVideoListBinding, BaseViewModel>() {
+class VideoListsActivity() : BaseActivity<ActivityVideoListBinding, VideoListViewModel>() {
     override fun inflateViewBinding(): ActivityVideoListBinding {
         return ActivityVideoListBinding.inflate(layoutInflater)
     }
 
-    override val viewModel: BaseViewModel by lazy {
-        ViewModelProvider(this)[BaseViewModel::class.java]
+    private lateinit var adapter: VideoListAdapter
+
+    override val viewModel: VideoListViewModel by lazy {
+        ViewModelProvider(this)[VideoListViewModel::class.java]
     }
+
+    @SuppressLint("SetTextI18n")
+    override fun initViewModel() {
+        super.initViewModel()
+        val getId = intent.getStringExtra("id")
+        val getTitle = intent.getStringExtra("title")
+        val getDesc = intent.getStringExtra("desc")
+        val getCount = intent.getIntExtra("count" ,0)
+
+        viewModel.getDetail(getId).observe(this) {
+            it.data?.let { it1 -> adapter.addList(it1.items) }
+            binding.tvTitle.text = getTitle
+            binding.tvDesc.text = getDesc
+            binding.tvCounterVideo.text = "$getCount video series"
+        }
+    }
+
+    override fun initListener() {
+        super.initListener()
+        binding.backTv.setOnClickListener { finish() }
+    }
+
 
 }
