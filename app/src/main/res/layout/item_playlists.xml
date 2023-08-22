@@ -34,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Playlist"
-            android:textColor="@color/black"
             android:layout_gravity="bottom|end"
             android:layout_marginVertical="2dp"
             android:layout_marginHorizontal="14dp"
@@ -58,7 +57,6 @@
             android:layout_height="wrap_content"
             android:text="title"
             android:textSize="18sp"
-            android:textColor="@color/black"
             android:textStyle="normal" />
 
         <TextView

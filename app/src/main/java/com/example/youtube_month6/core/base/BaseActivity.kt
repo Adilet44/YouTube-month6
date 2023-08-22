@@ -1,4 +1,4 @@
-package com.example.youtube_month6.base
+package com.example.youtube_month6.core.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
