@@ -16,11 +16,11 @@ interface ApiService {
         @Query("maxResults") maxResults: Int = 20
     ): Response<PlayLists>
 
-//    @GET("playlistItems")
-//    suspend fun playlistItems(
-//        @Query("key") key: String,
-//        @Query("part") part: String,
-//        @Query("playlistId") channelId: String,
-//        @Query("maxResults") maxResults: Int = 30
-//    ): Response<PlaylistItem>
+    @GET("playlistItems")
+    suspend fun playlistItems(
+        @Query("key") key: String,
+        @Query("part") part: String,
+        @Query("playlistId") channelId: String,
+        @Query("maxResults") maxResults: Int = 30
+    ): Response<PlaylistItem>
 }
