@@ -2,11 +2,12 @@ package com.example.youtube_month6.ui.video
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.youtube_month6.core.base.BaseActivity
 import com.example.youtube_month6.databinding.ActivityVideoListBinding
 import com.example.youtube_month6.ui.video.adapter.VideoListAdapter
 
-class VideoListsActivity() : BaseActivity<ActivityVideoListBinding, VideoListViewModel>() {
+class VideoListsActivity : BaseActivity<ActivityVideoListBinding, VideoListViewModel>() {
     override fun inflateViewBinding(): ActivityVideoListBinding {
         return ActivityVideoListBinding.inflate(layoutInflater)
     }
@@ -20,6 +21,7 @@ class VideoListsActivity() : BaseActivity<ActivityVideoListBinding, VideoListVie
     @SuppressLint("SetTextI18n")
     override fun initViewModel() {
         super.initViewModel()
+        adapter = VideoListAdapter()
         val getId = intent.getStringExtra("id")
         val getTitle = intent.getStringExtra("title")
         val getDesc = intent.getStringExtra("desc")
@@ -31,6 +33,13 @@ class VideoListsActivity() : BaseActivity<ActivityVideoListBinding, VideoListVie
             binding.tvDesc.text = getDesc
             binding.tvCounterVideo.text = "$getCount video series"
         }
+    }
+
+    override fun initView() {
+        super.initView()
+        adapter = VideoListAdapter()
+        binding.rvDetail.layoutManager = LinearLayoutManager(this)
+        binding.rvDetail.adapter = adapter
     }
 
     override fun initListener() {
